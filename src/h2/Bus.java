@@ -16,14 +16,20 @@ public class Bus{
     }
 
     public void exitBus(){
-        ArrayList leave=new ArrayList();
+        int[] leave=new int[this.getLength()+1];
+        for (int x=0;x<leave.length;x++){
+            leave[x]=-1;
+        }
         for (int x=0;x<passengers.toArray().length;x++){
             if (this.passengers.get(x).getVisited()>=Integer.valueOf(this.passengers.get(x).getPlanned())){
-                leave.add(x);
+                leave[x]=Integer.valueOf(x);
             }
         }
-        for (int x=0;x<leave.toArray().length;x++){
-            this.passengers.remove(leave.get(x));
+        for (int x=0;x<leave.length-1;x++){
+            if (leave[x]!=-1) {
+                System.out.println(this.passengers.get(leave[x]).getName()+" ist ausgestiegen.");
+                this.passengers.remove(leave[x]);
+            }
         }
     }
 
