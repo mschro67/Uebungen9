@@ -17,35 +17,34 @@ public class h2_main{
         for (int x=0;x<a;x++){
             System.out.print("Name von Passagier "+(x+1)+": ");
             String name=s.nextLine();
-            System.out.print("Geplante Stationen von Passagier "+(x+1)+": ");
+            System.out.print("Geplante Stationen von "+name+": ");
             int planned=Integer.parseInt(s.nextLine());
-            System.out.print("Ticket von Passagier "+(x+1)+": ");
+            System.out.print("Ticket von "+name+": ");
             Boolean ticket=Boolean.parseBoolean(s.nextLine());
             bus.enterBus(new Passenger(name,planned,ticket));
         }
 
-        System.out.print("\n- Stops fahren -\nStops: ");
+        System.out.print("\n\n- Stops fahren -\nStops: ");
         int stops=Integer.parseInt(s.nextLine());
         for (int x=0;x<stops;x++){
-            System.out.print("Neue Passagiere bei Stop "+(x+1)+": ");
-            a=Integer.parseInt(s.nextLine());
-            for (int y=0;x<a;x++){
-                System.out.print("Name von Passagier "+(x+1)+": ");
-                String name=s.nextLine();
-                System.out.print("Geplante Stationen von Passagier "+(x+1)+": ");
-                int planned=Integer.parseInt(s.nextLine());
-                System.out.print("Ticket von Passagier "+(x+1)+": ");
-                Boolean ticket=Boolean.parseBoolean(s.nextLine());
-                bus.enterBus(new Passenger(name,planned,ticket));
-            }
-            bus.nextStop();
-            bus.exitBus();
+            System.out.println("\nPassagiere (freiwillig) ausgestiegen bei Stop "+(x+1)+": "+bus.nextStopStr());
             ArrayList<Passenger> keinTicket=bus.findPassengersWithoutTicket();
             String[] entfernt=new String[keinTicket.toArray().length];
-            for (int y=0;x<entfernt.length;x++){
+            for (int y=0;y<entfernt.length;y++){
                 entfernt[x]=keinTicket.get(x).getName();
             }
             System.out.println("Passagiere ohne Ticket: "+Arrays.toString(entfernt));
+            System.out.print("Neue Passagiere bei Stop "+(x+1)+": ");
+            a=Integer.parseInt(s.nextLine());
+            for (int y=0;y<a;y++){
+                System.out.print("Name von Passagier "+(bus.getLength()+1)+": ");
+                String name=s.nextLine();
+                System.out.print("Geplante Stationen von "+name+": ");
+                int planned=Integer.parseInt(s.nextLine());
+                System.out.print("Ticket von "+name+": ");
+                Boolean ticket=Boolean.parseBoolean(s.nextLine());
+                bus.enterBus(new Passenger(name,planned,ticket));
+            }
             System.out.println("Passagiere: "+Arrays.toString(bus.getNames()));
         }
 
